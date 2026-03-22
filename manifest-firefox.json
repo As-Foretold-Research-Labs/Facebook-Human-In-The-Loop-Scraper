@@ -1,0 +1,35 @@
+{
+  "manifest_version": 2,
+  "name": "Facebook OSINT Collector (Firefox)",
+  "version": "0.1",
+  "description": "Passively collects Facebook post data from the DOM during normal browsing. Firefox compatibility manifest.",
+  "permissions": [
+    "storage",
+    "activeTab",
+    "https://*.facebook.com/*"
+  ],
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_title": "Facebook OSINT Collector"
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://*.facebook.com/*"],
+      "js": ["selectors.js", "content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "applications": {
+    "gecko": {
+      "id": "fbosint@local",
+      "strict_min_version": "91.0"
+    }
+  }
+}

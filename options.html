@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Facebook OSINT Collector Options</title>
+    <style>
+      body { font-family: Arial, sans-serif; padding: 12px; max-width: 720px; }
+      label { display: block; margin: 8px 0; }
+      input[type="text"], textarea { width: 100%; }
+      .muted { color: #666; font-size: 12px; }
+    </style>
+  </head>
+  <body>
+    <h2>Options</h2>
+    <div>
+      <label>Webhook URL (n8n, Supabase, custom):
+        <input type="text" id="webhookUrl" placeholder="https://example.com/webhook" />
+      </label>
+      <fieldset>
+        <legend>Notion integration</legend>
+        <label><input type="checkbox" id="notionEnabled" /> Enable Notion integration (periodic sync)</label>
+        <label>Notion Integration Key:
+          <input type="text" id="notionApiKey" placeholder="Paste internal integration key here" />
+        </label>
+        <label>Notion Database ID:
+          <input type="text" id="notionDatabaseId" placeholder="Database ID containing author names to track" />
+        </label>
+        <p class="muted">The extension looks for a "Name" or "Author" property in your Notion database. Only posts from matching authors will be collected.</p>
+      </fieldset>
+      <label><input type="checkbox" id="webhookEnabled" /> Enable webhook forwarding</label>
+      <label><input type="checkbox" id="autoCollect" /> Auto-collect on page load</label>
+      <fieldset>
+        <legend>Page contexts to collect from</legend>
+        <label><input type="checkbox" class="ctx" value="feed" /> News Feed</label>
+        <label><input type="checkbox" class="ctx" value="profile" /> Profile / Page</label>
+        <label><input type="checkbox" class="ctx" value="group" /> Groups</label>
+        <label><input type="checkbox" class="ctx" value="search" /> Search results</label>
+        <label><input type="checkbox" class="ctx" value="watch" /> Watch</label>
+        <label><input type="checkbox" class="ctx" value="event" /> Events</label>
+      </fieldset>
+      <label>Author name filter (comma-separated, empty = collect all):
+        <input type="text" id="nameFilter" placeholder="Jane Doe, John Smith" />
+      </label>
+      <label>Keyword filter (comma-separated, only collect posts containing at least one):
+        <input type="text" id="keywordFilter" placeholder="keyword1,keyword2" />
+      </label>
+      <div style="margin-top:10px;">
+        <button id="save">Save</button>
+        <button id="restore">Restore defaults</button>
+      </div>
+      <div id="status" class="muted"></div>
+    </div>
+    <script src="options.js"></script>
+  </body>
+</html>

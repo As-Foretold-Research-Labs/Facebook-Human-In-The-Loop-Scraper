@@ -1,0 +1,27 @@
+{
+  "manifest_version": 3,
+  "name": "Facebook OSINT Collector",
+  "version": "0.1",
+  "description": "Passively collects Facebook post data from the DOM during normal browsing.",
+  "permissions": [
+    "storage",
+    "activeTab"
+  ],
+  "host_permissions": [
+    "*://*.facebook.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "options_page": "options.html",
+  "content_scripts": [
+    {
+      "matches": ["*://*.facebook.com/*"],
+      "js": ["selectors.js", "content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}
